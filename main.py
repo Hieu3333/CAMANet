@@ -14,19 +14,12 @@ from modules.utils import parse_args, auto_resume_helper, load_checkpoint
 from modules.logger import create_logger
 import torch.distributed as dist
 from torch.utils.tensorboard import SummaryWriter
-import sys
-
-
 
 
 def main():
     # parse arguments
-    import sys
-    print("Raw sys.argv:", sys.argv)
-
     args, config = parse_args()
     print(args)
-
     # if config.AMP_OPT_LEVEL != "O0":
     #     assert amp is not None, "amp not installed!"
 

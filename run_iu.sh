@@ -1,19 +1,17 @@
-#!/bin/bash
 python main.py \
---cfg configs/swin_tiny_patch4_window7_224.yaml \
---exp_name $exp_name \
+--exp_name $exp_name$ \
 --label_path labels/labels.json \
 --dataset_name iu_xray \
---data_dir data \
 --max_seq_length 60 \
 --threshold 3 \
---batch_size 16 \
+--batch_size 32 \
 --epochs 30 \
 --lr_ve 1e-3 \
 --lr_ed 2e-3 \
 --save_dir ./results/iu_xray \
 --ve_name densenet121 \
 --ed_name r2gen \
+--cfg configs/swin_tiny_patch4_window7_224.yaml \
 --early_stop 10 \
 --weight_decay 5e-5 \
 --optim Adam \

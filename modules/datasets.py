@@ -21,14 +21,6 @@ class BaseDataset(Dataset):
         self.image_dir = os.path.join(args.data_dir, args.dataset_name,  'images')
         self.ann_path = os.path.join(args.data_dir, args.dataset_name, 'annotation.json')
         self.ann = json.loads(open(self.ann_path, 'r').read())
-
-        print("Debugging args in datasets.py:")
-        print("args.data_dir:", args.data_dir)
-        print("args.dataset_name:", args.dataset_name)
-        print("args.label_path:", args.label_path)
-
-
-
         self.labels_path = os.path.join(args.data_dir, args.dataset_name, args.label_path)
         self.labels = json.loads(open(self.labels_path, 'r').read())
 

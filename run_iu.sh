@@ -1,5 +1,5 @@
 python main.py \
---exp_name $exp_name$ \
+--exp_name "H" \
 --label_path labels/labels.json \
 --dataset_name iu_xray \
 --max_seq_length 60 \

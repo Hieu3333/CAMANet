@@ -19,7 +19,9 @@ METEOR_JAR = 'meteor-1.5.jar'
 class Meteor:
 
     def __init__(self):
-        self.meteor_cmd = ['java', '-Xmx2G', '-jar', METEOR_JAR, '-', '-', '-stdio', '-l', 'en', '-norm']
+        self.meteor_cmd = ['java', '-Xmx2G', '-jar', METEOR_JAR, 
+                   '-', '-', '-stdio', '-l', 'en', '-norm', 
+                   'data/paraphrase-en.gz']
 
         self.meteor_p = subprocess.Popen(self.meteor_cmd, \
                 cwd=os.path.dirname(os.path.abspath(__file__)), \

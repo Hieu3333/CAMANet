@@ -18,3 +18,8 @@ pip install unzip
 unzip iu_xray.zip -d data
 cd data/iu_xray
 mkdir labels
+
+mkdir -p /root/CAMANet/pycocoevalcap/meteor/data/
+cd /root/CAMANet/pycocoevalcap/meteor/data/
+wget https://raw.githubusercontent.com/cmu-mtlab/meteor/master/data/paraphrase-en.gz
+

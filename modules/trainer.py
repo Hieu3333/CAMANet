@@ -258,69 +258,69 @@ class Trainer(BaseTrainer):
         num_steps = len(self.train_dataloader)
         self.model.train()
         cur_lr = [param_group['lr'] for param_group in self.optimizer.param_groups]
-        # with tqdm(desc='Epoch %d - train, lr:(%.5f,%.5f)' % (epoch, cur_lr[0], cur_lr[1]),
-        #           unit='it', total=len(self.train_dataloader)) as pbar:
-        #     for batch_idx, (images_id, images, reports_ids, reports_masks, labels) in enumerate(self.train_dataloader):
-        #         images, reports_ids, reports_masks, labels = images.to(self.device, non_blocking=True), \
-        #                                              reports_ids.to(self.device, non_blocking=True), \
-        #                                              reports_masks.to(self.device, non_blocking=True), \
-        #                                              labels.to(self.device, non_blocking = True)
+        with tqdm(desc='Epoch %d - train, lr:(%.5f,%.5f)' % (epoch, cur_lr[0], cur_lr[1]),
+                  unit='it', total=len(self.train_dataloader)) as pbar:
+            for batch_idx, (images_id, images, reports_ids, reports_masks, labels) in enumerate(self.train_dataloader):
+                images, reports_ids, reports_masks, labels = images.to(self.device, non_blocking=True), \
+                                                     reports_ids.to(self.device, non_blocking=True), \
+                                                     reports_masks.to(self.device, non_blocking=True), \
+                                                     labels.to(self.device, non_blocking = True)
                 
-        #         logits, total_att, clip_loss, total_attn = None, None, None, None
+                logits, total_att, clip_loss, total_attn = None, None, None, None
 
-        #         if self.addcls:
-        #             output, logits, cam, fore_map, total_attn, _, align_attns_train, clip_loss = self.model(images, reports_ids, labels, mode='train')
-        #         else:
-        #                 output, clip_loss = self.model(images, reports_ids, mode='train')
-        #         loss = self.criterion(output, reports_ids, reports_masks)
-
-
-        #         ce_losses += loss.item()
-
-        #         if logits is not None:
-        #             img_cls_loss = self.cls_criterion(logits, labels)
-        #             loss = loss + self.cls_w * img_cls_loss
-        #             img_cls_losses += img_cls_loss.item()
-
-        #         if total_attn is not None:
-        #             mse_loss = self.mse_criterion(total_attn, fore_map, logits, labels)
-        #             loss = loss + self.mse_w * mse_loss
-        #             mse_losses += mse_loss.item()
-
-        #         if clip_loss is not None:
-        #             loss = loss + self.clip_w * clip_loss
-        #             clip_losses += clip_loss.item()
+                if self.addcls:
+                    output, logits, cam, fore_map, total_attn, _, align_attns_train, clip_loss = self.model(images, reports_ids, labels, mode='train')
+                else:
+                        output, clip_loss = self.model(images, reports_ids, mode='train')
+                loss = self.criterion(output, reports_ids, reports_masks)
 
 
-        #         self.optimizer.zero_grad()
-        #         loss.backward()
-        #         torch.nn.utils.clip_grad_value_(self.model.parameters(), self.clip_value)
+                ce_losses += loss.item()
+
+                if logits is not None:
+                    img_cls_loss = self.cls_criterion(logits, labels)
+                    loss = loss + self.cls_w * img_cls_loss
+                    img_cls_losses += img_cls_loss.item()
+
+                if total_attn is not None:
+                    mse_loss = self.mse_criterion(total_attn, fore_map, logits, labels)
+                    loss = loss + self.mse_w * mse_loss
+                    mse_losses += mse_loss.item()
+
+                if clip_loss is not None:
+                    loss = loss + self.clip_w * clip_loss
+                    clip_losses += clip_loss.item()
 
 
-        #         #loss.backward()
-        #         #torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
-        #         self.optimizer.step()
-        #         self.lr_scheduler.step_update((epoch-1) * num_steps + batch_idx)
-        #         #self.lr_scheduler.step_update(epoch * num_steps + batch_idx)
+                self.optimizer.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_value_(self.model.parameters(), self.clip_value)
 
-        #         if total_attn is not None:
-        #             std_fore, std_attn = torch.std(fore_map.detach(), dim=1), torch.std(total_attn.detach(), dim=1)
-        #             std_fores += std_fore.mean().item()
-        #             std_attns += std_attn.mean().item()
 
-        #         # self.lr_scheduler.step_update((epoch) * num_steps + batch_idx)
-        #         memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
-        #         cur_lr = [param_group['lr'] for param_group in self.optimizer.param_groups]
-        #         pbar.set_postfix(ce_ls=ce_losses / (batch_idx + 1), cls_ls=img_cls_losses / (batch_idx + 1),
-        #                          clip_ls=clip_losses / (batch_idx + 1),
-        #                          mse_ls = mse_losses / (batch_idx + 1), mem = f'mem {memory_used:.0f}MB')
-        #         pbar.update()
-        #     log = {'ce_loss': ce_losses / len(self.train_dataloader)}
-        # self.writer.add_scalar('data/ce_loss', ce_losses/len(self.train_dataloader), epoch)
-        # self.writer.add_scalar('data/cls_loss', img_cls_losses/len(self.train_dataloader), epoch)
-        # self.writer.add_scalar('data/mse_loss', mse_losses/len(self.train_dataloader), epoch)
-        # self.writer.add_scalar('data/std_fore', std_fores/len(self.train_dataloader), epoch)
-        # self.writer.add_scalar('data/std_attn', std_attns/len(self.train_dataloader), epoch)
+                #loss.backward()
+                #torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
+                # self.optimizer.step()
+                self.lr_scheduler.step_update((epoch-1) * num_steps + batch_idx)
+                #self.lr_scheduler.step_update(epoch * num_steps + batch_idx)
+
+                if total_attn is not None:
+                    std_fore, std_attn = torch.std(fore_map.detach(), dim=1), torch.std(total_attn.detach(), dim=1)
+                    std_fores += std_fore.mean().item()
+                    std_attns += std_attn.mean().item()
+
+                # self.lr_scheduler.step_update((epoch) * num_steps + batch_idx)
+                memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
+                cur_lr = [param_group['lr'] for param_group in self.optimizer.param_groups]
+                pbar.set_postfix(ce_ls=ce_losses / (batch_idx + 1), cls_ls=img_cls_losses / (batch_idx + 1),
+                                 clip_ls=clip_losses / (batch_idx + 1),
+                                 mse_ls = mse_losses / (batch_idx + 1), mem = f'mem {memory_used:.0f}MB')
+                pbar.update()
+            log = {'ce_loss': ce_losses / len(self.train_dataloader)}
+        self.writer.add_scalar('data/ce_loss', ce_losses/len(self.train_dataloader), epoch)
+        self.writer.add_scalar('data/cls_loss', img_cls_losses/len(self.train_dataloader), epoch)
+        self.writer.add_scalar('data/mse_loss', mse_losses/len(self.train_dataloader), epoch)
+        self.writer.add_scalar('data/std_fore', std_fores/len(self.train_dataloader), epoch)
+        self.writer.add_scalar('data/std_attn', std_attns/len(self.train_dataloader), epoch)
 
         self.model.eval()
         with tqdm(desc='Epoch %d - val' % epoch, unit='it', total=len(self.val_dataloader)) as pbar:

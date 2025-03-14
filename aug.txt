@@ -1,3 +1,20 @@
+=> merge config from configs/swin_tiny_patch4_window7_224.yaml
+Namespace(accumulation_steps=None, addcls=True, amp_opt_level='O0',
+ amsgrad=True, attn_cam=True, attn_method='max', back_t=0.3, balanced=False, 
+ batch_size=32, beam_size=3, block_trigrams=1, bos_idx=0, cache_mode='no', 
+ cfg='configs/swin_tiny_patch4_window7_224.yaml', clip=False, clip_value=0.1, 
+ clip_w=0.5, cls=False, cls_w=1.0, d_ff=512, d_model=512, d_vf=2048, data_dir='data',
+  dataset_name='iu_xray', decay_epochs=50, decay_rate=0.8, decoding_constraint=0, 
+  drop_fbl=False, drop_prob_lm=0.5, dropout=0.1, early_exit=False, early_stop=10, 
+  ed_name='r2gen', eos_idx=0, epochs=30, eval=False, exp_name='H', fbl=True, 
+  finetune=False, fore_t=0.6, fp16=False, group_size=1, img_size=224, label_path='labels/labels.json', 
+  layer_id=2, local_rank=-1, logit_layers=1, logs_folder='tensorboard_logs', lr_ed=0.002, lr_scheduler='step', 
+  lr_ve=0.001, max_seq_length=60, monitor_metric='BLEU_4', monitor_mode='max', mse_w=0.15, n_gpu=1, num_heads=8, 
+  num_layers=3, num_workers=16, optim='Adam', opts=None, output='output', output_logsoftmax=1, pad_idx=0, pretrained=None, 
+  randaug=False, record_dir='records/', resume=False, rm_d_model=512, rm_num_heads=8, rm_num_slots=3, sample_method='beam_search', 
+  sample_n=1, save_dir='./results/iu_xray', save_period=1, seed=2401, step_size=50, sub_back=False, tag=None, temperature=1.0,
+   test=False, threshold=3, throughput=False, topk=0.25, use_bn=0, use_checkpoint=False, ve_name='densenet121', vis=False,
+    visual_extractor_pretrained=True, warmup_epochs=0, warmup_lr=0.0001, weight_decay=5e-05, wmse=False, zip=False)
 AUG:
   AUTO_AUGMENT: rand-m9-mstd0.5-inc1
   COLOR_JITTER: 0.0
@@ -110,3 +127,15 @@ images:  torch.Size([32, 2, 3, 224, 224])
 report_ids torch.Size([32, 60])
 report_mask: torch.Size([32, 60])
 labels: torch.Size([32, 14])
+
+In model.py
+gbl_feats: torch.Size([32, 1024])
+patch_feats: torch.Size([32, 99, 1024])
+targets: torch.Size([32, 60])
+In _prepare_feature_forward:
+seq: torch.Size([32, 59])
+att_feats: torch.Size([32, 99, 512])
+att_masks: torch.Size([32, 1, 99])
+seq_mask: torch.Size([32, 59, 59])
+fore_rep: torch.Size([32, 1, 1024])
+fore_map: torch.Size([32, 98])

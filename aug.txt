@@ -123,6 +123,17 @@ TRAIN:
   WARMUP_LR: 0.0001
   WEIGHT_DECAY: 5.0e-05
 
+addcls=True
+clip=False
+cls=False
+batch_size=32
+d_ff=512
+d_model=512
+d_vf=2048
+num_heads=8
+rm_num_heads=8 
+rm_num_slots=3
+
 images:  torch.Size([32, 2, 3, 224, 224])
 report_ids torch.Size([32, 60])
 report_mask: torch.Size([32, 60])

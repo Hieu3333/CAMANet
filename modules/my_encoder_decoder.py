@@ -69,7 +69,7 @@ class Transformer(nn.Module):
         #src: att_feats (B, 2*Ns, d_model)
         #tgt: seq (B, seq_len - 1) 
         #src_mask: att_masks (B, 1, 2*Ns)
-        #tgt_mask: seq_mask (B, 1, seq_len - 1) or None
+        #tgt_mask: seq_mask (B, seq_len-1, seq_len - 1)
         return self.decode(self.encode(src, src_mask), src_mask, tgt, tgt_mask, mode)
 
     def encode(self, src, src_mask):
@@ -439,9 +439,9 @@ class EncoderDecoder(AttModel):
         #seq: report_ids
         att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks, seq)
         #att_feats	(B, 2*Ns, d_model)
-        #seq	(B, seq_len - 1) or None
+        #seq	(B, seq_len - 1) 
         #att_masks	(B, 1, 2*Ns)
-        #seq_mask	(B, 1, seq_len - 1) or None
+        #seq_mask	(B, 1, seq_len - 1) 
         out, fore_rep_encoded, target_embed, align_attns = self.model(att_feats, seq, att_masks, seq_mask)
         if self.clip:
             avg_img_feats = torch.mean(att_feats, dim=1)

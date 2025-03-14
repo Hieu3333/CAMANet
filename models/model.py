@@ -86,6 +86,8 @@ class R2GenModel(nn.Module):
                 #fore_rep: (B,1,feat_size); r'-discriminative representation
                 #back_rep: (B,1,feat_size)
                 #fore_map: (B,2*Ns); d_v
+                print("fore_rep:",fore_rep.shape)
+                print("fore_map:",fore_map.shape)
                 fore_rep, back_rep, fore_map = self.fore_back_learn(patch_feats, cams, logits)
                 if self.sub_back:
                     patch_feats = patch_feats - back_rep
@@ -95,6 +97,10 @@ class R2GenModel(nn.Module):
             patch_feats, gbl_feats = self.visual_extractor(images)
         if mode == 'train':
             #target: report_ids
+            print("In model.py")
+            print("gbl_feats:",gbl_feats.shape)
+            print("patch_feats:",patch_feats.shape)
+            print("targets:",targets.shape)
             output, fore_rep_encoded, target_embed, align_attns, clip_loss = self.encoder_decoder(gbl_feats, patch_feats, targets, mode='forward')
             if self.addcls and self.attn_cam:
                 total_attns, idxs, align_attns_train = self.attn_cam_con(fore_rep_encoded, target_embed, align_attns, targets)

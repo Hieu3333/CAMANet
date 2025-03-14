@@ -426,7 +426,11 @@ class EncoderDecoder(AttModel):
             seq_mask = seq_mask & subsequent_mask(seq.size(-1)).to(seq_mask)
         else:
             seq_mask = None
-
+        print("In _prepare_feature_forward:")
+        print("seq:",seq.shape)
+        print("att_feats:",att_feats.shape)
+        print("att_masks:",att_masks.shape)
+        print("seq_mask:",seq_mask.shape)
         return att_feats, seq, att_masks, seq_mask
 
     def _forward(self, fc_feats, att_feats, seq, att_masks=None):

@@ -121,10 +121,10 @@ class BaseTrainer(object):
                 else:
                     not_improved_count += 1
 
-                if not_improved_count > self.early_stop:
-                    self.logger.info("Validation performance didn\'t improve for {} epochs. " "Training stops.".format(
-                        self.early_stop))
-                    break
+                # if not_improved_count > self.early_stop:
+                #     self.logger.info("Validation performance didn\'t improve for {} epochs. " "Training stops.".format(
+                #         self.early_stop))
+                #     break
             self.logger.info('current best model in: {}'.format(self.best_epoch))
 
             if epoch % self.save_period == 0:

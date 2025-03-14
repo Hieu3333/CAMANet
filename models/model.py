@@ -86,9 +86,10 @@ class R2GenModel(nn.Module):
                 #fore_rep: (B,1,feat_size); r'-discriminative representation
                 #back_rep: (B,1,feat_size)
                 #fore_map: (B,2*Ns); d_v
+                
+                fore_rep, back_rep, fore_map = self.fore_back_learn(patch_feats, cams, logits)
                 print("fore_rep:",fore_rep.shape)
                 print("fore_map:",fore_map.shape)
-                fore_rep, back_rep, fore_map = self.fore_back_learn(patch_feats, cams, logits)
                 if self.sub_back:
                     patch_feats = patch_feats - back_rep
                 patch_feats = torch.cat((fore_rep, patch_feats), dim=1) #(B,2*Ns+1,feat_size)

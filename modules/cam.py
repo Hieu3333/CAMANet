@@ -10,12 +10,14 @@ class CAM:
         self.normalized = normalized
         self.relu = relu
 
-    def compute_scores(self,patch_feats, fc_layer, class_idx):
-        weights = self._get_weights(fc_layer, class_idx)
+    def compute_scores(self,patch_feats, fc_layer, class_idx): #fc_layer is self.head = Linear(self.num_features, n_classes); class_idx : list(range(14)
+        weights = self._get_weights(fc_layer, class_idx) #(n_classes,feat_size)
         with torch.no_grad():
         # n_cam = weights.shape[0]
         #patch_feats = patch_feats.unsqueeze(1).expand(patch_feats.shape[0], n_cam, patch_feats.shape[1],patch_feats.shape[2])
-            cams = torch.matmul(patch_feats, weights.transpose(-2,-1)).transpose(-2,-1)
+
+            #patch_feats = (B,2*Ns,feat_size) @(feat_size,n_classes) -> (B,2*Ns,n_classes) -> (B,n_classes,2*Ns)
+            cams = torch.matmul(patch_feats, weights.transpose(-2,-1)).transpose(-2,-1) #(B,n_classes,2*Ns) #Eq 6 in the paper
         # print(cams.shape)
         #
         #
@@ -31,7 +33,7 @@ class CAM:
                 cams = F.relu(cams, inplace=True)
         # Normalize the CAM
             if self.normalized:
-                cams = self._normalize(cams)
+                cams = self._normalize(cams) #It is not normalized???
 
             #cams.append(cam)
         return cams

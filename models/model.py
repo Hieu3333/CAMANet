@@ -70,21 +70,31 @@ class R2GenModel(nn.Module):
     #         raise ValueError
     #     return output
 
+    
     def forward(self, images, targets=None,labels=None, mode='train'):
         fore_map, total_attns, weights, attns, idxs, align_attns_train = None, None, None, None, None, None
         clip_loss, logits = None, None
         if self.addcls:
+            # patch_feats : (B,2*Ns,feat_size) V_s
+            # gbl_feats : (B,feat_size) v_g
+            # logits : (B,n_classes)
+            # cams : (B,n_classes,2*Ns)
             patch_feats, gbl_feats, logits, cams = self.visual_extractor(images)
+
             #if self.fbl and labels is not None:
             if self.fbl:
+                #fore_rep: (B,1,feat_size); r'-discriminative representation
+                #back_rep: (B,1,feat_size)
+                #fore_map: (B,2*Ns); d_v
                 fore_rep, back_rep, fore_map = self.fore_back_learn(patch_feats, cams, logits)
                 if self.sub_back:
                     patch_feats = patch_feats - back_rep
-                patch_feats = torch.cat((fore_rep, patch_feats), dim=1)
+                patch_feats = torch.cat((fore_rep, patch_feats), dim=1) #(B,2*Ns+1,feat_size)
 
         else:
             patch_feats, gbl_feats = self.visual_extractor(images)
         if mode == 'train':
+            #target: report_ids
             output, fore_rep_encoded, target_embed, align_attns, clip_loss = self.encoder_decoder(gbl_feats, patch_feats, targets, mode='forward')
             if self.addcls and self.attn_cam:
                 total_attns, idxs, align_attns_train = self.attn_cam_con(fore_rep_encoded, target_embed, align_attns, targets)

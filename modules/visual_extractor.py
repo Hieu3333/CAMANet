@@ -88,22 +88,24 @@ class VisualExtractor(nn.Module):
                 # avg_feats = torch.cat((avg_feats_1, avg_feats_2), dim=1)
                 avg_feats = torch.mean(torch.cat((avg_feats_1.unsqueeze(1), avg_feats_2.unsqueeze(1)), dim=1), dim=1)
             elif self.ve_name.startswith('densenet'):
-                patch_feats_1 = F.relu(self.model(images[:, 0]), inplace=True)
+                patch_feats_1 = F.relu(self.model(images[:, 0]), inplace=True)  #(B,feat_size,H',W')
                 patch_feats_2 = F.relu(self.model(images[:, 1]), inplace=True)
+                
                 # print(1111, torch.cat((patch_feats_1, patch_feats_2),dim=3).shape)
-                avg_feats_1 = F.adaptive_avg_pool2d(patch_feats_1, (1, 1)).squeeze().reshape(-1, patch_feats_1.size(1))
+                avg_feats_1 = F.adaptive_avg_pool2d(patch_feats_1, (1, 1)).squeeze().reshape(-1, patch_feats_1.size(1)) #(B,feat_size,H',W') -> (B,feat_size,1,1) -> (B,feat_size)
                 avg_feats_2 = F.adaptive_avg_pool2d(patch_feats_2, (1, 1)).squeeze().reshape(-1, patch_feats_2.size(1))
 
                 # avg_feats = (avg_feats_1 + avg_feats_2)/2
                 #avg_feats = F.adaptive_avg_pool2d(torch.cat((patch_feats_1, patch_feats_2), dim=3),
                 #                                  (1, 1)).squeeze().reshape(-1, patch_feats_1.size(1))
                 batch_size, feat_size, _, _ = patch_feats_1.shape
-                patch_feats_1 = patch_feats_1.reshape(batch_size, feat_size, -1).permute(0, 2, 1)
+                patch_feats_1 = patch_feats_1.reshape(batch_size, feat_size, -1).permute(0, 2, 1) #(B,Ns,feat_size) Ns=H' x W' (number of patches)
                 patch_feats_2 = patch_feats_2.reshape(batch_size, feat_size, -1).permute(0, 2, 1)
-                patch_feats = torch.cat((patch_feats_1, patch_feats_2), dim=1)
+                patch_feats = torch.cat((patch_feats_1, patch_feats_2), dim=1) #(B,2*Ns,feat_size)
                 #avg_feats = torch.cat((avg_feats_1, avg_feats_2), dim=1)
 
-                avg_feats = torch.mean(torch.cat((avg_feats_1.unsqueeze(1), avg_feats_2.unsqueeze(1)), dim=1), dim=1)
+                #(B,1,feat_size) concat (B,1,feat_size) -> (B,2,feat_size) -> (B,feat_size)
+                avg_feats = torch.mean(torch.cat((avg_feats_1.unsqueeze(1), avg_feats_2.unsqueeze(1)), dim=1), dim=1) #(B,feat_size) v_g
 
         else:
             if self.ve_name.lower().startswith('vit'):
@@ -124,7 +126,8 @@ class VisualExtractor(nn.Module):
                 patch_feats = patch_feats.reshape(batch_size, feat_size, -1).permute(0, 2, 1)
         logits, cams = None, None
         if self.addcls:
-            logits = self.head(avg_feats)
+            logits = self.head(avg_feats) #(B,n_classes)
             cams = self.cam.compute_scores(patch_feats, self.head, list(range(14)))
-            return patch_feats, avg_feats, logits, cams
+            return patch_feats, avg_feats, logits, cams 
+        
         return patch_feats, avg_feats

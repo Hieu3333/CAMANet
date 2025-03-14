@@ -26,6 +26,9 @@ def pad_unsort_packed_sequence(input, inv_ix):
 
 
 def pack_wrapper(module, att_feats, att_masks):
+    #att_feats: patch_feats : (B,2*Ns,feat_size) V_s
+    #seq: report_ids
+    #att_mask is None
     if att_masks is not None:
         packed, inv_ix = sort_pack_padded_sequence(att_feats, att_masks.data.long().sum(1))
         return pad_unsort_packed_sequence(PackedSequence(module(packed[0]), packed[1]), inv_ix)
@@ -65,6 +68,9 @@ class AttModel(CaptionModel):
 
     def clip_att(self, att_feats, att_masks):
         # Clip the length of att_masks and att_feats to the maximum length
+        #att_feats: patch_feats : (B,2*Ns,feat_size) V_s
+        #seq: report_ids
+        #att_mask is None
         if att_masks is not None:
             max_len = att_masks.data.long().sum(1).max()
             att_feats = att_feats[:, :max_len].contiguous()

@@ -264,6 +264,10 @@ class Trainer(BaseTrainer):
                                                      reports_ids.to(self.device, non_blocking=True), \
                                                      reports_masks.to(self.device, non_blocking=True), \
                                                      labels.to(self.device, non_blocking = True)
+                print("images: ",images.shape)
+                print("report_ids", reports_ids.shape)
+                print("report_mask:",reports_masks.shape)
+                print("labels:",labels.shape)
                 logits, total_att, clip_loss, total_attn = None, None, None, None
 
                 if self.addcls:

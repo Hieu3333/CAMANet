@@ -36,6 +36,19 @@ def subsequent_mask(size):
     return torch.from_numpy(subsequent_mask) == 0
 
 
+#         c = copy.deepcopy
+#         attn = MultiHeadedAttention(self.num_heads, self.d_model)
+#         ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
+#         position = PositionalEncoding(self.d_model, self.dropout)
+#         rm = RelationalMemory(num_slots=self.rm_num_slots, d_model=self.rm_d_model, num_heads=self.rm_num_heads)
+#         model = Transformer(
+#             Encoder(EncoderLayer(self.d_model, c(attn), c(ff), self.dropout), self.num_layers),
+#             Decoder(
+#                 DecoderLayer(self.d_model, c(attn), c(attn), c(ff), self.dropout, self.rm_num_slots, self.rm_d_model),
+#                 self.num_layers),
+#             lambda x: x,
+#             nn.Sequential(Embeddings(self.d_model, tgt_vocab), c(position)),
+#             rm, fbl=self.fbl)
 class Transformer(nn.Module):
     def __init__(self, encoder, decoder, src_embed, tgt_embed, rm, fbl=False):
         super(Transformer, self).__init__()
@@ -45,8 +58,18 @@ class Transformer(nn.Module):
         self.tgt_embed = tgt_embed
         self.rm = rm
         self.fbl = fbl
-
+    #att_feats	(B, 2*Ns, d_model)
+        #seq	(B, seq_len - 1) or None
+        #att_masks	(B, 1, 2*Ns)
+        #seq_mask	(B, 1, seq_len - 1) or None
+        #src_embed: lambda x:x
+        #tgt_embed: nn.Sequential(Embeddings(self.d_model, tgt_vocab), c(position))
+    #out, fore_rep_encoded, target_embed, align_attns = self.model(att_feats, seq, att_masks, seq_mask)
     def forward(self, src, tgt, src_mask, tgt_mask, mode='train'):
+        #src: att_feats (B, 2*Ns, d_model)
+        #tgt: seq (B, seq_len - 1) 
+        #src_mask: att_masks (B, 1, 2*Ns)
+        #tgt_mask: seq_mask (B, 1, seq_len - 1) or None
         return self.decode(self.encode(src, src_mask), src_mask, tgt, tgt_mask, mode)
 
     def encode(self, src, src_mask):
@@ -111,7 +134,19 @@ class LayerNorm(nn.Module):
         std = x.std(-1, keepdim=True)
         return self.gamma * (x - mean) / (std + self.eps) + self.beta
 
-
+#          c = copy.deepcopy
+#         attn = MultiHeadedAttention(self.num_heads, self.d_model)
+#         ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
+#         position = PositionalEncoding(self.d_model, self.dropout)
+#         rm = RelationalMemory(num_slots=self.rm_num_slots, d_model=self.rm_d_model, num_heads=self.rm_num_heads)
+#         model = Transformer(
+#             Encoder(EncoderLayer(self.d_model, c(attn), c(ff), self.dropout), self.num_layers),
+#             Decoder(
+#                 DecoderLayer(self.d_model, c(attn), c(attn), c(ff), self.dropout, self.rm_num_slots, self.rm_d_model),
+#                 self.num_layers),
+#             lambda x: x,
+#             nn.Sequential(Embeddings(self.d_model, tgt_vocab), c(position)),
+#             rm, fbl=self.fbl)
 class Decoder(nn.Module):
     def __init__(self, layer, N):
         super(Decoder, self).__init__()
@@ -190,11 +225,11 @@ class ConditionalLayerNorm(nn.Module):
         return gamma_hat * (x - mean) / (std + self.eps) + beta_hat
 
 
-class MultiHeadedAttention(nn.Module):
+class MultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads, self.d_model)
     def __init__(self, h, d_model, dropout=0.1):
         super(MultiHeadedAttention, self).__init__()
         assert d_model % h == 0
-        self.d_k = d_model // h
+        self.d_k = d_model // h #head_size
         self.h = h
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attn = None
@@ -205,8 +240,8 @@ class MultiHeadedAttention(nn.Module):
             mask = mask.unsqueeze(1)
         nbatches = query.size(0)
         query, key, value = \
-            [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
-             for l, x in zip(self.linears, (query, key, value))]
+            [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)   #Linear projection before attention?
+             for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
 
@@ -240,13 +275,13 @@ class PositionalEncoding(nn.Module):
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
 
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len).unsqueeze(1).float()
+        pe = torch.zeros(max_len, d_model) #(max_len,d_model)
+        position = torch.arange(0, max_len).unsqueeze(1).float() #(max_len,1)
         div_term = torch.exp(torch.arange(0, d_model, 2).float() *
                              -(math.log(10000.0) / d_model))
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
-        pe = pe.unsqueeze(0)
+        pe = pe.unsqueeze(0) #(1, max_len, d_model)
         self.register_buffer('pe', pe)
 
     def forward(self, x):
@@ -371,6 +406,9 @@ class EncoderDecoder(AttModel):
         return fc_feats[..., :1], att_feats[..., :1], memory, att_masks
 
     def _prepare_feature_forward(self, att_feats, att_masks=None, seq=None):
+        #att_feats: patch_feats : (B,2*Ns,feat_size) V_s
+        #seq: report_ids
+        #att_mask is None
         att_feats, att_masks = self.clip_att(att_feats, att_masks)
         att_feats = pack_wrapper(self.att_embed, att_feats, att_masks)
 
@@ -392,8 +430,14 @@ class EncoderDecoder(AttModel):
         return att_feats, seq, att_masks, seq_mask
 
     def _forward(self, fc_feats, att_feats, seq, att_masks=None):
-
+        #fc_feat: gbl_feats : (B,feat_size) v_g
+        #att_feats: patch_feats : (B,2*Ns,feat_size) V_s
+        #seq: report_ids
         att_feats, seq, att_masks, seq_mask = self._prepare_feature_forward(att_feats, att_masks, seq)
+        #att_feats	(B, 2*Ns, d_model)
+        #seq	(B, seq_len - 1) or None
+        #att_masks	(B, 1, 2*Ns)
+        #seq_mask	(B, 1, seq_len - 1) or None
         out, fore_rep_encoded, target_embed, align_attns = self.model(att_feats, seq, att_masks, seq_mask)
         if self.clip:
             avg_img_feats = torch.mean(att_feats, dim=1)

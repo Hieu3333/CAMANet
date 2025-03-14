@@ -190,6 +190,7 @@ class BaseTrainer(object):
             print("Saving current best: model_best.pth ...")
 
     def _resume_checkpoint(self, resume_path):
+        resume_path = "model_iu_xray.pth"
         resume_file = auto_resume_helper(resume_path)
         #resume_path = str(resume_path)
         print("Loading checkpoint: {} ...".format(resume_file))

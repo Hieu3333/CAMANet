@@ -65,7 +65,7 @@ class BaseTrainer(object):
         self.early_stop = getattr(self.args, 'early_stop', inf)
 
         self.start_epoch = 1
-        self.checkpoint_dir = os.path.join(args.save_dir, args.exp_name)
+        self.checkpoint_dir = 'checkpoint'
         self.best_epoch = 0
 
         if not os.path.exists(self.checkpoint_dir):
@@ -190,7 +190,7 @@ class BaseTrainer(object):
             print("Saving current best: model_best.pth ...")
 
     def _resume_checkpoint(self, resume_path):
-        resume_path = "checkpoint"
+        
         resume_file = auto_resume_helper(resume_path)
         #resume_path = str(resume_path)
         print("Loading checkpoint: {} ...".format(resume_file))

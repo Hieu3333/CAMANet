@@ -197,7 +197,7 @@ class BaseTrainer(object):
         checkpoint = torch.load(resume_file)
         self.start_epoch = checkpoint['epoch'] + 1
         self.mnt_best = checkpoint['monitor_best']
-        self.mnt_test_best = checkpoint['monitor_test_best']
+        # self.mnt_test_best = checkpoint['monitor_test_best']
         self.model.load_state_dict(checkpoint['state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer'])
         self.best_epoch = checkpoint['best_epoch']

@@ -1,5 +1,5 @@
 python main.py \
---exp_name $exp_name$ \
+--exp_name "H" \
 --label_path labels/labels.json \
 --dataset_name iu_xray \
 --max_seq_length 60 \
@@ -30,4 +30,4 @@ python main.py \
 --layer_id 2 \
 --mse_w 0.15 \
 --num_workers 4 \
---resume 
+

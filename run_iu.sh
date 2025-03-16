@@ -12,7 +12,7 @@ python main.py \
 --ve_name densenet121 \
 --ed_name r2gen \
 --cfg configs/swin_tiny_patch4_window7_224.yaml \
---early_stop 10 \
+--early_stop 30 \
 --weight_decay 5e-5 \
 --optim Adam \
 --decay_epochs 10 \

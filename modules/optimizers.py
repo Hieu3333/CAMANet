@@ -58,7 +58,8 @@ def build_optimizer_cls(args, model):
 
 def build_lr_scheduler(config, optimizer, n_iter_per_epoch):
     num_steps = int(config.TRAIN.EPOCHS * n_iter_per_epoch)
-    decay_steps = int(config.TRAIN.LR_SCHEDULER.DECAY_EPOCHS * n_iter_per_epoch)
+    # decay_steps = int(config.TRAIN.LR_SCHEDULER.DECAY_EPOCHS * n_iter_per_epoch)
+    decay_steps =int(config.TRAIN.LR_SCHEDULER.DECAY_EPOCHS * 10)
     warmup_steps = int(config.TRAIN.WARMUP_EPOCHS * n_iter_per_epoch)
     print('In optimizer:')
     print('num_step:',num_steps)

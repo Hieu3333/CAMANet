@@ -60,6 +60,10 @@ def build_lr_scheduler(config, optimizer, n_iter_per_epoch):
     num_steps = int(config.TRAIN.EPOCHS * n_iter_per_epoch)
     decay_steps = int(config.TRAIN.LR_SCHEDULER.DECAY_EPOCHS * n_iter_per_epoch)
     warmup_steps = int(config.TRAIN.WARMUP_EPOCHS * n_iter_per_epoch)
+    print('In optimizer:')
+    print('num_step:',num_steps)
+    print('decay_step:',decay_steps)
+    print('warm_up_step:',warmup_steps)
     lr_scheduler = None
     if config.TRAIN.LR_SCHEDULER.NAME == 'cosine':
         lr_scheduler = CosineLRScheduler(

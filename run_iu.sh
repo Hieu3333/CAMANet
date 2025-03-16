@@ -15,7 +15,7 @@ python main.py \
 --early_stop 10 \
 --weight_decay 5e-5 \
 --optim Adam \
---decay_epochs 50 \
+--decay_epochs 10 \
 --warmup_epochs 0 \
 --warmup_lr 1e-4 \
 --lr_scheduler step \

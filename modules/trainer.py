@@ -65,7 +65,7 @@ class BaseTrainer(object):
         self.early_stop = getattr(self.args, 'early_stop', inf)
 
         self.start_epoch = 1
-        self.checkpoint_dir = 'checkpoint'
+        self.checkpoint_dir = os.path.join(args.save_dir, args.exp_name)
         self.best_epoch = 0
 
         if not os.path.exists(self.checkpoint_dir):
@@ -121,10 +121,10 @@ class BaseTrainer(object):
                 else:
                     not_improved_count += 1
 
-                # if not_improved_count > self.early_stop:
-                #     self.logger.info("Validation performance didn\'t improve for {} epochs. " "Training stops.".format(
-                #         self.early_stop))
-                #     break
+                if not_improved_count > self.early_stop:
+                    self.logger.info("Validation performance didn\'t improve for {} epochs. " "Training stops.".format(
+                        self.early_stop))
+                    break
             self.logger.info('current best model in: {}'.format(self.best_epoch))
 
             if epoch % self.save_period == 0:
@@ -299,7 +299,7 @@ class Trainer(BaseTrainer):
 
                 #loss.backward()
                 #torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
-                # self.optimizer.step()
+                self.optimizer.step()
                 self.lr_scheduler.step_update((epoch-1) * num_steps + batch_idx)
                 #self.lr_scheduler.step_update(epoch * num_steps + batch_idx)
 

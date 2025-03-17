@@ -12,11 +12,11 @@ python main.py \
 --ve_name densenet121 \
 --ed_name r2gen \
 --cfg configs/swin_tiny_patch4_window7_224.yaml \
---early_stop 30 \
+--early_stop 10 \
 --weight_decay 5e-5 \
 --optim Adam \
---decay_epochs 10 \
---warmup_epochs 3 \ 
+--decay_epochs 50 \
+--warmup_epochs 0 \
 --warmup_lr 1e-4 \
 --lr_scheduler step \
 --decay_rate 0.8 \
@@ -29,5 +29,3 @@ python main.py \
 --topk 0.25 \
 --layer_id 2 \
 --mse_w 0.15 \
---num_workers 4 \
-

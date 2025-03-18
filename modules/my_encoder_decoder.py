@@ -19,8 +19,6 @@ def clones(module, N):
 
 
 def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
-    if mask is None:
-        print("mask is None")
     #query,key,value (B,diff_num_head,N,2d)
     d_k = query.size(-1) #2d
     diff_d_k = d_k // 2 #d
@@ -31,8 +29,8 @@ def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
 
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
     #mask: (B,1,2*Ns)
-    # if mask is not None:
-    #     scores = scores.masked_fill(mask == 0, -1e9)
+    if mask is not None:
+        scores = scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
     p_attn = F.softmax(scores, dim=-1)
     p_attn = p_attn.reshape(B,diff_num_head,2,-1,N)

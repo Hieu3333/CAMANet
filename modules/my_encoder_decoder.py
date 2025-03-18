@@ -18,7 +18,7 @@ def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 
 
-def diff_attention(query, key, value, mask=None, dropout=None):
+def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=None):
     #query,key,value (B,diff_num_head,N,2d)
     d_k = query.size(-1) #2d
     diff_d_k = d_k // 2 #d
@@ -28,9 +28,15 @@ def diff_attention(query, key, value, mask=None, dropout=None):
 
     query = query.split()
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
+    scores = scores.view(B,diff_num_head,2,N,N)
+
+    lambda1 = torch.exp(torch.sum(lq1 * lk1, dim=-1).float())
+    lambda2 = torch.exp(torch.sum(lq2 * lk2, dim=-1).float())
+    lambda_full = lambda1 - lambda2 + linit
+    final_scores = scores[:,:,0] - lambda_full* scores[:,:,1] #(B,diff_num_head,N,N)
     #mask: (B,1,2*Ns)
     if mask is not None:
-        scores = scores.masked_fill(mask == 0, -1e9)
+        scores = final_scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
     p_attn = F.softmax(scores, dim=-1)
     if dropout is not None:
@@ -252,6 +258,11 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
         self.diff_num_head = h // 2 #h
         self.diff_d_k = 2* standard_d_k #2d
         self.linears = clones(nn.Linear(d_model, d_model), 4)
+        self.lambda_init = 0.8
+        self.lambda_q1 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_q2 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_k1 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_k2 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
 
@@ -264,7 +275,8 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
              for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
         #query,key,value (B,diff_num_head,N,2d)
 
-        x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
+        x, self.attn = diff_attention(query, key, value, mask=mask, dropout=self.dropout,lq1=self.lambda_k1,lq2=self.lambda_q2,
+                                      lk1=self.lambda_k1,lk2=self.lambda_k2,linit=self.lambda_init)
 
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
@@ -288,7 +300,7 @@ class MultiHeadedAttention(nn.Module):
              for l, x in zip(self.linears, (query, key, value))]
         print("In multi-headed attention")
         print("query:",query.shape)
-        print("mask:",mask.shape)
+        # print("mask:",mask.shape)
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
 

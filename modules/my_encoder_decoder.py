@@ -26,7 +26,6 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     query = query.reshape(B,2*diff_num_head,N,d_k//2) #(B,2*diff_num_head,N,d)
     key = key.reshape(B,2*diff_num_head,N,d_k//2) #(B,2*diff_num_head,N,d)
 
-    query = query.split()
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
     scores = scores.view(B,diff_num_head,2,N,N)
 

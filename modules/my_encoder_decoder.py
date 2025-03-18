@@ -44,6 +44,8 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     return torch.matmul(p_attn, value), p_attn
 
 def attention(query, key, value, mask=None, dropout=None):
+    if mask is None:
+        print("mask is None")
     d_k = query.size(-1)
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
     if mask is not None:
@@ -409,7 +411,7 @@ class EncoderDecoder(AttModel):
 
     def make_model(self, tgt_vocab):
         c = copy.deepcopy
-        attn = DiffMultiHeadedAttention(self.num_heads, self.d_model)
+        attn = MultiHeadedAttention(self.num_heads, self.d_model)
         ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
         position = PositionalEncoding(self.d_model, self.dropout)
         rm = RelationalMemory(num_slots=self.rm_num_slots, d_model=self.rm_d_model, num_heads=self.rm_num_heads)

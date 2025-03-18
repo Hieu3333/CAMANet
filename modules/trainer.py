@@ -300,7 +300,8 @@ class Trainer(BaseTrainer):
 
                 #loss.backward()
                 #torch.nn.utils.clip_grad_value_(self.model.parameters(), 0.1)
-                self.optimizer.step()
+                # self.optimizer.step()
+                self.lr_scheduler
                 self.lr_scheduler.step_update((epoch-1) * num_steps + batch_idx)
                 #self.lr_scheduler.step_update(epoch * num_steps + batch_idx)
 

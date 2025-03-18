@@ -18,6 +18,25 @@ def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 
 
+def diff_attention(query, key, value, mask=None, dropout=None):
+    #query,key,value (B,diff_num_head,N,2d)
+    d_k = query.size(-1) #2d
+    diff_d_k = d_k // 2 #d
+    B, diff_num_head, N, _ = value.size()
+    query = query.view(B,2*diff_num_head,N,d_k//2) #(B,2*diff_num_head,N,d)
+    key = key.view(B,2*diff_num_head,N,d_k//2) #(B,2*diff_num_head,N,d)
+
+    query = query.split()
+    scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
+    #mask: (B,1,2*Ns)
+    if mask is not None:
+        scores = scores.masked_fill(mask == 0, -1e9)
+        # scores = scores.masked_fill(mask == 0, 0)
+    p_attn = F.softmax(scores, dim=-1)
+    if dropout is not None:
+        p_attn = dropout(p_attn)
+    return torch.matmul(p_attn, value), p_attn
+
 def attention(query, key, value, mask=None, dropout=None):
     d_k = query.size(-1)
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
@@ -28,7 +47,6 @@ def attention(query, key, value, mask=None, dropout=None):
     if dropout is not None:
         p_attn = dropout(p_attn)
     return torch.matmul(p_attn, value), p_attn
-
 
 def subsequent_mask(size):
     attn_shape = (1, size, size)
@@ -225,11 +243,37 @@ class ConditionalLayerNorm(nn.Module):
         return gamma_hat * (x - mean) / (std + self.eps) + beta_hat
 
 
-class MultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads, self.d_model)
+class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads, self.d_model)
+    #head_dim stay the same for Q,K and 2*head_dim for V while diff_num_head = 1/2 * num_head 
     def __init__(self, h, d_model, dropout=0.1):
         super(MultiHeadedAttention, self).__init__()
         assert d_model % h == 0
-        self.d_k = d_model // h #head_size
+        standard_d_k = d_model // h #standard head_size
+        self.diff_num_head = h // 2 #h
+        self.diff_d_k = 2* standard_d_k #2d
+        self.linears = clones(nn.Linear(d_model, d_model), 4)
+        self.attn = None
+        self.dropout = nn.Dropout(p=dropout)
+
+    def forward(self, query, key, value, mask=None):
+        if mask is not None:
+            mask = mask.unsqueeze(1)
+        nbatches = query.size(0)
+        query, key, value = \
+            [l(x).view(nbatches, -1, self.diff_num_head, self.d_k).transpose(1, 2)   #Linear projection before attention?
+             for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
+        #query,key,value (B,diff_num_head,N,2d)
+
+        x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
+
+        x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
+        return self.linears[-1](x)
+
+class MultiHeadedAttention(nn.Module):
+    def __init__(self, h, d_model, dropout=0.1):
+        super(MultiHeadedAttention, self).__init__()
+        assert d_model % h == 0
+        self.d_k = d_model // h
         self.h = h
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attn = None
@@ -240,14 +284,17 @@ class MultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads, se
             mask = mask.unsqueeze(1)
         nbatches = query.size(0)
         query, key, value = \
-            [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)   #Linear projection before attention?
-             for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
+            [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
+             for l, x in zip(self.linears, (query, key, value))]
+        print("In multi-headed attention")
+        print("query:",query.shape)
+        print("mask:",mask.shape)
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
 
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
         return self.linears[-1](x)
-
+    
 
 class PositionwiseFeedForward(nn.Module):
     def __init__(self, d_model, d_ff, dropout=0.1):
@@ -414,7 +461,8 @@ class EncoderDecoder(AttModel):
 
         if att_masks is None:
             att_masks = att_feats.new_ones(att_feats.shape[:2], dtype=torch.long)
-        att_masks = att_masks.unsqueeze(-2)
+        att_masks = att_masks.unsqueeze(-2) 
+        # (B, 1, 2*Ns), filled with 1s
 
         if seq is not None:
             # crop the last one

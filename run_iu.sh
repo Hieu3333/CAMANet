@@ -29,4 +29,4 @@ python main.py \
 --topk 0.25 \
 --layer_id 2 \
 --mse_w 0.15 \
---num_workers 8
+--num_workers 16

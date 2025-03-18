@@ -65,7 +65,8 @@ class BaseTrainer(object):
         self.early_stop = getattr(self.args, 'early_stop', inf)
 
         self.start_epoch = 1
-        self.checkpoint_dir = os.path.join(args.save_dir, args.exp_name)
+        # self.checkpoint_dir = os.path.join(args.save_dir, args.exp_name)
+        self.checkpoint_dir = 'checkpoint'
         self.best_epoch = 0
 
         if not os.path.exists(self.checkpoint_dir):

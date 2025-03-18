@@ -1,0 +1,399 @@
+Epoch 1 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:34<00:00,  1.88it/s, ce_ls=4.67, clip_ls=0, cls_ls=0.185, mem=m
+Epoch 1 - val: 100%|███████████| 10/10 [00:32<00:00,  3.28s/it, ce_ls=3.97, cls_ls=0.162, mem=mem 10053MB, mse_ls=0.065]
+Epoch 1 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.86s/it]
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 1
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 4.668627485632896
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.175900900900891
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.09863947082978551
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.06332180105428209
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.04354845760006479
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.08316841869360372
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.21228318855539988
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.008008428368137808
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 3.96522433757782
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.17228813559321549
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.09836691583915383
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.0636043031681106
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.04359319067190815
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.09142908039034363
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.2193591334854967
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.0069520586093514665
+[2025-03-17 17:48:30 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 1
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Epoch 2 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=3.78, clip_ls=0, cls_ls=0.16, mem=me
+Epoch 2 - val: 100%|███████████| 10/10 [00:33<00:00,  3.38s/it, ce_ls=3.55, cls_ls=0.176, mem=mem 10061MB, mse_ls=0.109]
+Epoch 2 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:56<00:00,  2.95s/it]
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 2
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.7789574414491653
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.08973608669372592
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.057971035575445855
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.03941809319932997
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.0270571226612989
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.07704736906141135
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.2528257289465051
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.04715400832555019
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 3.545269989967346
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.11883291845435578
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.07904937828117127
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.054266396751699024
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.037527765650446694
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.08993479198749887
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.28073091225892494
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.06209446029265053
+[2025-03-17 17:50:33 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 1
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 3 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=3.39, clip_ls=0, cls_ls=0.156, mem=m
+Epoch 3 - val: 100%|██████████| 10/10 [00:33<00:00,  3.35s/it, ce_ls=3.06, cls_ls=0.153, mem=mem 10061MB, mse_ls=0.0212]
+Epoch 3 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:55<00:00,  2.92s/it]
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 3
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.391460683196783
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.2605730602392391
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.15873031246574942
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.10523944397669575
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.07439147660662711
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.14055374424494613
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.33071687379320747
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.1751094798378297
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 3.0565136194229128
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.30418168085490876
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.186114251967071
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.12470087354620604
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.08955964394250118
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.152727100661535
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.34843588733409536
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.2529108864957606
+[2025-03-17 17:52:35 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 3
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Epoch 4 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=3, clip_ls=0, cls_ls=0.154, mem=mem
+Epoch 4 - val: 100%|███████████| 10/10 [00:32<00:00,  3.27s/it, ce_ls=2.83, cls_ls=0.156, mem=mem 10061MB, mse_ls=0.013]
+Epoch 4 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.87s/it]
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 4
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.0038835890591145
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.23109674301497624
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.1491182413387652
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.1016968383551303
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.07119697273861941
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.13277202841461466
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.32315724414092695
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.19877736320030956
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.827829623222351
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.27059748404632794
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.17279738996153127
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.11815376893897273
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.08404703877948326
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.14229287947449887
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3402279631541601
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.25862486479283664
+[2025-03-17 17:54:36 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 3
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 5 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=3.28, clip_ls=0, cls_ls=0.152, mem=m
+Epoch 5 - val: 100%|██████████| 10/10 [00:33<00:00,  3.35s/it, ce_ls=3.29, cls_ls=0.162, mem=mem 10061MB, mse_ls=0.0193]
+Epoch 5 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.88s/it]
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 5
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.279766771942377
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.17817688768734188
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.08790067459601694
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.04428567748234647
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.014792209345390077
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.06994537261335519
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.26468755786657144
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.0454612401152823
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 3.285776710510254
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.19990123647432273
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.09653473377183788
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.0480018770288966
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.016702236193728605
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.07520820770648348
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.2681038701706362
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.05433351740954639
+[2025-03-17 17:56:37 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 3
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 6 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.03it/s, ce_ls=3.13, clip_ls=0, cls_ls=0.15, mem=me
+Epoch 6 - val: 100%|██████████| 10/10 [00:32<00:00,  3.29s/it, ce_ls=2.84, cls_ls=0.149, mem=mem 10061MB, mse_ls=0.0161]
+Epoch 6 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.87s/it]
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 6
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.131650686264038
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.3144736275286155
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.21436306782102346
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.15732107536598205
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.11447249132674418
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.1567098183292819
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.33926751474539196
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.2720807880809786
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.838448739051819
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.3551699302513334
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.2413674781619869
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.1771936644352116
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.1296803339440467
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.1685957251976532
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.34781194391006093
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.36890746229389204
+[2025-03-17 17:58:37 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 6
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Epoch 7 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.01it/s, ce_ls=2.87, clip_ls=0, cls_ls=0.147, mem=m
+Epoch 7 - val: 100%|██████████| 10/10 [00:33<00:00,  3.31s/it, ce_ls=2.73, cls_ls=0.152, mem=mem 10061MB, mse_ls=0.0171]
+Epoch 7 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:55<00:00,  2.91s/it]
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 7
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.8743498027324677
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.27055948081038395
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.17684416831943944
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.1261738823057671
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.09581320198463329
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.14583174173899804
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.3612299096801575
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.3235437903626601
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.733846354484558
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.3207974385558946
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.20888630440720693
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.14948146186463515
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.11372855211356797
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.1619447955733917
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.37899649783164785
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.3510761632393472
+[2025-03-17 18:00:40 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 6
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 8 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.03it/s, ce_ls=3.05, clip_ls=0, cls_ls=0.147, mem=m
+Epoch 8 - val: 100%|██████████| 10/10 [00:33<00:00,  3.33s/it, ce_ls=2.89, cls_ls=0.157, mem=mem 10061MB, mse_ls=0.0227]
+Epoch 8 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:55<00:00,  2.93s/it]
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 8
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 3.052753783762455
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.09427968601999051
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.06007233386582556
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.03853115773913117
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.024593141497291762
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.0913148373730519
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.27284612467923863
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.06369251384345792
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.8868130922317503
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.120710946712109
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.078470370677613
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.05069987602242721
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.03164368701961283
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.10101800589617872
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.2848501587553085
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.07241542141841384
+[2025-03-17 18:02:41 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 6
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 9 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.03it/s, ce_ls=2.83, clip_ls=0, cls_ls=0.149, mem=m
+Epoch 9 - val: 100%|██████████| 10/10 [00:33<00:00,  3.33s/it, ce_ls=2.58, cls_ls=0.166, mem=mem 10061MB, mse_ls=0.0139]
+Epoch 9 - test: 100%|███████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.89s/it]
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 9
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.831103604286909
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.3126951562608456
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.20265498662036877
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.1422437374797691
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.10713301399730205
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.15129301633078474
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.36285432361591957
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.308830479831194
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.577631878852844
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.3645767602032054
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.23675946796636277
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.16816290589347388
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.128053439034884
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.16788528937143532
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3801347470472511
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.3624394125459302
+[2025-03-17 18:04:42 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 6
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 10 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.01it/s, ce_ls=2.92, clip_ls=0, cls_ls=0.147, mem=
+Epoch 10 - val: 100%|██████████| 10/10 [00:33<00:00,  3.31s/it, ce_ls=2.74, cls_ls=0.149, mem=mem 10061MB, mse_ls=0.019]
+Epoch 10 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:55<00:00,  2.91s/it]
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 10
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.924296375364065
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.36889548245837006
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.25498270922254557
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.18931043403361747
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.14353873934630945
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.17185187902225005
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.37675731609679974
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.37306228051358026
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.7447405815124513
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.4222583647563392
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.29375223229686204
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.22199562845979356
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.17281812600755922
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.19122703354412188
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.39367172625410735
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.487884734126093
+[2025-03-17 18:06:44 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Epoch 11 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=2.67, clip_ls=0, cls_ls=0.145, mem=
+Epoch 11 - val: 100%|█████████| 10/10 [00:33<00:00,  3.34s/it, ce_ls=2.52, cls_ls=0.153, mem=mem 10061MB, mse_ls=0.0228]
+Epoch 11 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.87s/it]
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 11
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.67055718973279
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.31333955637678756
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.20442922500640806
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.14830024014154705
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.11210456299072034
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.1503468430457027
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.36771219321460674
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.3340902513523203
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.517285776138306
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.36227020613607086
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.23597129872742567
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.17316691480757224
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.13327156722210717
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.16706289895422446
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3842315217198483
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.3769295612830344
+[2025-03-17 18:08:45 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 12 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.04it/s, ce_ls=2.54, clip_ls=0, cls_ls=0.147, mem=
+Epoch 12 - val: 100%|█████████| 10/10 [00:33<00:00,  3.33s/it, ce_ls=2.43, cls_ls=0.153, mem=mem 10061MB, mse_ls=0.0223]
+Epoch 12 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:53<00:00,  2.84s/it]
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 12
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.5379044972360134
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.1988625889127359
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.1180353903908086
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.0835544869652126
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.06400886298630389
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.1034722429799017
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.29474007494202537
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.3334546083255143
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.425353479385376
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.2414891728040812
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.14657508017251872
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.10545486468993152
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.08101704657824713
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.11945841070409312
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3121804906222145
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.3441480457892968
+[2025-03-17 18:10:45 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 13 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=2.57, clip_ls=0, cls_ls=0.144, mem=
+Epoch 13 - val: 100%|█████████| 10/10 [00:33<00:00,  3.32s/it, ce_ls=2.56, cls_ls=0.148, mem=mem 10061MB, mse_ls=0.0169]
+Epoch 13 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.87s/it]
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 13
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.5715368539094925
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.14543575074385764
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.08981242655655852
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.06020606286364672
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.04207022580690176
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.087767557556685
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.26430788807403305
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.13746897608932301
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.560034394264221
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.18106872274872568
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.1143742018491652
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.07774042957698853
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.05556291214131788
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.09973986163524827
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.28618276944242166
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.16417440933557625
+[2025-03-17 18:12:46 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 14 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.02it/s, ce_ls=2.5, clip_ls=0, cls_ls=0.145, mem=m
+Epoch 14 - val: 100%|█████████| 10/10 [00:32<00:00,  3.30s/it, ce_ls=2.36, cls_ls=0.155, mem=mem 10061MB, mse_ls=0.0146]
+Epoch 14 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.89s/it]
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 14
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.497659642249346
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.26386562298564503
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.14834347818367266
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.09860793953634879
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.07204652638351743
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.11484779897907095
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.2893110371438131
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.2778030699332874
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.3582372188568117
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.30157423736380684
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.1713662594578
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.11562640356513042
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.085853122623474
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.12619556537728366
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3018054707924568
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.30454762164599497
+[2025-03-17 18:14:46 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 15 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:30<00:00,  2.07it/s, ce_ls=2.64, clip_ls=0, cls_ls=0.145, mem=
+Epoch 15 - val: 100%|█████████| 10/10 [00:33<00:00,  3.34s/it, ce_ls=2.76, cls_ls=0.144, mem=mem 10061MB, mse_ls=0.0171]
+Epoch 15 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.89s/it]
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 15
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.642033001407981
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.0651178931249901
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.04207481784434449
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.03041945941876143
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.022741110720127886
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.08538902650991938
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.23018764277335382
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.057844507151058724
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.7567094564437866
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.08660118775537934
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.05736725822477455
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.04248967928647402
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.03267540632286108
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.09478562010554044
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.2588256472291404
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.11187007608090617
+[2025-03-17 18:16:47 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 16 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:31<00:00,  2.04it/s, ce_ls=2.55, clip_ls=0, cls_ls=0.145, mem=
+Epoch 16 - val: 100%|█████████| 10/10 [00:33<00:00,  3.31s/it, ce_ls=2.51, cls_ls=0.146, mem=mem 10061MB, mse_ls=0.0192]
+Epoch 16 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.86s/it]
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 16
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.545652002096176
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.020596059529456888
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.01156447992203211
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.007225878087617334
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.004770799799894374
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.06332047288388655
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.19181024462091
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.03544647381350059
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.5078592777252195
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.030186730290714028
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.01687116201644016
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.010404243875041838
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.006750320655300781
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.06899814414070392
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.21230763815834994
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.05460283264115916
+[2025-03-17 18:18:47 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 17 - train, lr:(0.00100,0.00200):  69%|▋| 44/64 [00:21<00:08,  2.24it/s, ce_ls=2.47, clip_ls=0, cls_ls=0.144, mem=Epoch 17 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:30<00:00,  2.09it/s, ce_ls=2.48, clip_ls=0, cls_ls=0.142, mem=
+Epoch 17 - val: 100%|█████████| 10/10 [00:32<00:00,  3.26s/it, ce_ls=2.43, cls_ls=0.141, mem=mem 10061MB, mse_ls=0.0237]
+Epoch 17 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:53<00:00,  2.83s/it]
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 17
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.478605080395937
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.1656434983229709
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.10627607005897736
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.0721754937573591
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.049052539867639994
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.096052691095939
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.26388950120475146
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.15318850035173368
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.4343036890029905
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.20401564595777685
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.13461867787569629
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.09288293474373052
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.06433226173815419
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.1094535389952338
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.2876425273969754
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.18339287558201547
+[2025-03-17 18:20:45 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10
+Saving checkpoint: ./results/iu_xray/$/current_checkpoint.pth ...
+Epoch 18 - train, lr:(0.00100,0.00200): 100%|█| 64/64 [00:30<00:00,  2.08it/s, ce_ls=2.45, clip_ls=0, cls_ls=0.143, mem=
+Epoch 18 - val: 100%|█████████| 10/10 [00:33<00:00,  3.31s/it, ce_ls=2.36, cls_ls=0.149, mem=mem 10061MB, mse_ls=0.0176]
+Epoch 18 - test: 100%|██████████████████████████████████████████████████████████████████| 19/19 [00:54<00:00,  2.85s/it]
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        epoch          : 18
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        ce_loss        : 2.4480116721242666
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_1     : 0.3221227520023746
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_2     : 0.21197539816513308
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_3     : 0.15076931123098508
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_BLEU_4     : 0.11367077411544552
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_METEOR     : 0.14869781492966397
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_ROUGE_L    : 0.3538982416974828
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_Cider      : 0.3219132751428945
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        val_loss       : 2.3568581342697144
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_1    : 0.3734743321144853
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_2    : 0.24728577571912772
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_3    : 0.17745688613750152
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_BLEU_4    : 0.13443145595519462
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_METEOR    : 0.16588075142101114
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_ROUGE_L   : 0.3708760917737232
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 100): INFO        test_Cider     : 0.38174631162000294
+[2025-03-17 18:22:44 swin_tiny_patch4_window7_224](trainer.py 128): INFO current best model in: 10

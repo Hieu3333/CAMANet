@@ -1,3 +1,4 @@
+#git clone https://github.com/Markin-Wang/CAMANet.git
 git clone https://github.com/Hieu3333/CAMANet.git
 cd CAMANet
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh

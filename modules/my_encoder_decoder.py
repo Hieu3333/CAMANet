@@ -271,7 +271,7 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
             mask = mask.unsqueeze(1)
         nbatches = query.size(0)
         query, key, value = \
-            [l(x).view(nbatches, -1, self.diff_num_head, self.d_k).transpose(1, 2)   #Linear projection before attention?
+            [l(x).view(nbatches, -1, self.diff_num_head, self.diff_d_k).transpose(1, 2)   #Linear projection before attention?
              for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
         #query,key,value (B,diff_num_head,N,2d)
 

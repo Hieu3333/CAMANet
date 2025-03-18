@@ -272,7 +272,7 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
             [l(x).view(nbatches, -1, self.diff_num_head, self.diff_d_k).transpose(1, 2)   #Linear projection before attention?
              for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
         #query,key,value (B,diff_num_head,N,2d)
-        print("lambda:",self.lambda_k1.shape)
+        # print("lambda:",self.lambda_k1.shape)
         lambda1 = torch.exp(torch.sum(self.lambda_q1 * self.lambda_k1, dim=-1).float())
         lambda2 = torch.exp(torch.sum(self.lambda_q2 * self.lambda_k2, dim=-1).float())
         lambda_full = lambda1 - lambda2 + self.lambda_init
@@ -291,6 +291,7 @@ class MultiHeadedAttention(nn.Module):
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
+        print('In standard attention')
 
     def forward(self, query, key, value, mask=None):
         if mask is not None:

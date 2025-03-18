@@ -41,7 +41,7 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     #     scores = scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
     p_attn = F.softmax(scores, dim=-1)
-    p_attn = p_attn.reshape(B,diff_num_head,2,-1,d_k)
+    p_attn = p_attn.reshape(B,diff_num_head,2,N,N)
     p_attn = p_attn[:,:,0] - lambda_full* p_attn[:,:,1] #(B,diff_num_head,N,N)
     if dropout is not None:
         p_attn = dropout(p_attn)

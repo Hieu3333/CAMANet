@@ -36,8 +36,8 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     lambda_full = lambda1 - lambda2 + linit
     
     #mask: (B,1,2*Ns)
-    if mask is not None:
-        scores = scores.masked_fill(mask == 0, -1e9)
+    # if mask is not None:
+    #     scores = scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
     p_attn = F.softmax(scores, dim=-1)
     p_attn = p_attn[:,:,0] - lambda_full* p_attn[:,:,1] #(B,diff_num_head,N,N)

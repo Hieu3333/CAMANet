@@ -25,7 +25,7 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     d_k = query.size(-1) #2d
     diff_d_k = d_k // 2 #d
     B, diff_num_head, N, d_k = value.size()
-    print(B,diff_num_head,N,d_k)
+    # print(B,diff_num_head,N,d_k)
     query = query.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
     key = key.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
 

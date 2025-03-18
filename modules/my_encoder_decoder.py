@@ -300,7 +300,7 @@ class MultiHeadedAttention(nn.Module):
              for l, x in zip(self.linears, (query, key, value))]
         print("In multi-headed attention")
         print("query:",query.shape)
-        # print("mask:",mask.shape)
+        print("mask:",mask is None)
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
 

@@ -252,7 +252,7 @@ class ConditionalLayerNorm(nn.Module):
 class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads, self.d_model)
     #head_dim stay the same for Q,K and 2*head_dim for V while diff_num_head = 1/2 * num_head 
     def __init__(self, h, d_model, dropout=0.1):
-        super(MultiHeadedAttention, self).__init__()
+        super(DiffMultiHeadedAttention, self).__init__()
         assert d_model % h == 0
         standard_d_k = d_model // h #standard head_size
         self.diff_num_head = h // 2 #h

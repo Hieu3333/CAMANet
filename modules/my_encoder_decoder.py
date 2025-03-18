@@ -21,8 +21,6 @@ def clones(module, N):
 def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     #query,key,value (B,diff_num_head,N,2d)
     d_k = query.size(-1) #2d
-    print('query:',query.shape)
-    print('key:',key.shape)
     diff_d_k = d_k // 2 #d
     B, diff_num_head, N, d_k = value.size()
     # print(B,diff_num_head,N,d_k)

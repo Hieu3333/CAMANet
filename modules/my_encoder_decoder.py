@@ -32,12 +32,13 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     lambda1 = torch.exp(torch.sum(lq1 * lk1, dim=-1).float())
     lambda2 = torch.exp(torch.sum(lq2 * lk2, dim=-1).float())
     lambda_full = lambda1 - lambda2 + linit
-    final_scores = scores[:,:,0] - lambda_full* scores[:,:,1] #(B,diff_num_head,N,N)
+    
     #mask: (B,1,2*Ns)
     if mask is not None:
-        scores = final_scores.masked_fill(mask == 0, -1e9)
+        scores = scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
     p_attn = F.softmax(scores, dim=-1)
+    p_attn = p_attn[:,:,0] - lambda_full* p_attn[:,:,1] #(B,diff_num_head,N,N)
     if dropout is not None:
         p_attn = dropout(p_attn)
     return torch.matmul(p_attn, value), p_attn
@@ -277,7 +278,7 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
         x, self.attn = diff_attention(query, key, value, mask=mask, dropout=self.dropout,lq1=self.lambda_k1,lq2=self.lambda_q2,
                                       lk1=self.lambda_k1,lk2=self.lambda_k2,linit=self.lambda_init)
 
-        x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.h * self.d_k)
+        x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.diff_num_head * self.diff_d_k)
         return self.linears[-1](x)
 
 class MultiHeadedAttention(nn.Module):

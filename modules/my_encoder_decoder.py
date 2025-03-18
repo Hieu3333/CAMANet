@@ -18,7 +18,7 @@ def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 
 
-def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=None):
+def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     if mask is None:
         print("mask is None")
     #query,key,value (B,diff_num_head,N,2d)
@@ -30,12 +30,6 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     key = key.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
 
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
-    
-
-    lambda1 = torch.exp(torch.sum(lq1 * lk1, dim=-1).float())
-    lambda2 = torch.exp(torch.sum(lq2 * lk2, dim=-1).float())
-    lambda_full = lambda1 - lambda2 + linit
-    
     #mask: (B,1,2*Ns)
     # if mask is not None:
     #     scores = scores.masked_fill(mask == 0, -1e9)
@@ -278,9 +272,11 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
             [l(x).view(nbatches, -1, self.diff_num_head, self.diff_d_k).transpose(1, 2)   #Linear projection before attention?
              for l, x in zip(self.linears, (query, key, value))]  #Apply the first 3 linear projection for query key value
         #query,key,value (B,diff_num_head,N,2d)
+        lambda1 = torch.exp(torch.sum(self.lambda_q1 * self.lambda_k1, dim=-1).float())
+        lambda2 = torch.exp(torch.sum(self.lambda_q2 * self.lambda_k2, dim=-1).float())
+        lambda_full = lambda1 - lambda2 + self.lambda_init
 
-        x, self.attn = diff_attention(query, key, value, mask=mask, dropout=self.dropout,lq1=self.lambda_k1,lq2=self.lambda_q2,
-                                      lk1=self.lambda_k1,lk2=self.lambda_k2,linit=self.lambda_init)
+        x, self.attn = diff_attention(query, key, value, mask=mask, dropout=self.dropout,lambda_full=lambda_full)
 
         x = x.transpose(1, 2).contiguous().view(nbatches, -1, self.diff_num_head * self.diff_d_k)
         return self.linears[-1](x)

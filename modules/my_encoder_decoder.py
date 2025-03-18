@@ -30,7 +30,7 @@ def diff_attention(query, key, value,lq1,lq2,lk1,lk2,linit, mask=None, dropout=N
     key = key.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
 
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
-    scores = scores.view(B,diff_num_head,2,N,N)
+    
 
     lambda1 = torch.exp(torch.sum(lq1 * lk1, dim=-1).float())
     lambda2 = torch.exp(torch.sum(lq2 * lk2, dim=-1).float())

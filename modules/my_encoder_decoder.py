@@ -298,9 +298,9 @@ class MultiHeadedAttention(nn.Module):
         query, key, value = \
             [l(x).view(nbatches, -1, self.h, self.d_k).transpose(1, 2)
              for l, x in zip(self.linears, (query, key, value))]
-        print("In multi-headed attention")
-        print("query:",query.shape)
-        print("mask:",mask is None)
+        # print("In multi-headed attention")
+        # print("query:",query.shape)
+        # print("mask:",mask is None)
 
         x, self.attn = attention(query, key, value, mask=mask, dropout=self.dropout)
 
@@ -409,7 +409,7 @@ class EncoderDecoder(AttModel):
 
     def make_model(self, tgt_vocab):
         c = copy.deepcopy
-        attn = MultiHeadedAttention(self.num_heads, self.d_model)
+        attn = DiffMultiHeadedAttention(self.num_heads, self.d_model)
         ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
         position = PositionalEncoding(self.d_model, self.dropout)
         rm = RelationalMemory(num_slots=self.rm_num_slots, d_model=self.rm_d_model, num_heads=self.rm_num_heads)

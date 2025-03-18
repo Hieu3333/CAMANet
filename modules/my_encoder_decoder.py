@@ -287,7 +287,6 @@ class MultiHeadedAttention(nn.Module):
         super(MultiHeadedAttention, self).__init__()
         assert d_model % h == 0
         self.d_k = d_model // h
-        print("standard head_size:",self.d_k)
         self.h = h
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.attn = None

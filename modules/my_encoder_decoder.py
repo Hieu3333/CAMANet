@@ -26,8 +26,8 @@ def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     diff_d_k = d_k // 2 #d
     B, diff_num_head, N, d_k = value.size()
     # print(B,diff_num_head,N,d_k)
-    query = query.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
-    key = key.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N,d)
+    query = query.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N_query,d)
+    key = key.reshape(B,2*diff_num_head,-1,d_k//2) #(B,2*diff_num_head,N_key,d)
 
     scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k//2) #(B,2*diff_num_head,N,N)
     #mask: (B,1,2*Ns)
@@ -37,7 +37,7 @@ def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     # p_attn = F.softmax(scores, dim=-1)
     p_attn = scores.reshape(B,diff_num_head,2,-1,N)
     p_attn1 = p_attn[:,:,0]
-    p_attn1 = F.softmax(p_attn1,dim=-1)
+    p_attn1 = F.softmax(p_attn1,dim=-1)   #separate softmax instead of using the same softmax in the paper
     p_attn2 = p_attn[:,:,1]
     p_attn2 = F.softmax(p_attn2,dim=-1)
 

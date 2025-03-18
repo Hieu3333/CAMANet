@@ -358,7 +358,7 @@ class RelationalMemory(nn.Module):
         self.num_heads = num_heads
         self.d_model = d_model
 
-        self.attn = MultiHeadedAttention(num_heads, d_model)
+        self.attn = DiffMultiHeadedAttention(num_heads, d_model)
         self.mlp = nn.Sequential(nn.Linear(self.d_model, self.d_model),
                                  nn.ReLU(),
                                  nn.Linear(self.d_model, self.d_model),

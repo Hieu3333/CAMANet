@@ -21,6 +21,8 @@ def clones(module, N):
 def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     #query,key,value (B,diff_num_head,N,2d)
     d_k = query.size(-1) #2d
+    print('query:',query.shape)
+    print('key:',key.shape)
     diff_d_k = d_k // 2 #d
     B, diff_num_head, N, d_k = value.size()
     # print(B,diff_num_head,N,d_k)
@@ -32,8 +34,13 @@ def diff_attention(query, key, value,lambda_full, mask=None, dropout=None):
     if mask is not None:
         scores = scores.masked_fill(mask == 0, -1e9)
         # scores = scores.masked_fill(mask == 0, 0)
-    p_attn = F.softmax(scores, dim=-1)
-    p_attn = p_attn.reshape(B,diff_num_head,2,-1,N)
+    # p_attn = F.softmax(scores, dim=-1)
+    p_attn = scores.reshape(B,diff_num_head,2,-1,N)
+    p_attn1 = p_attn[:,:,0]
+    p_attn1 = F.softmax(p_attn1,dim=-1)
+    p_attn2 = p_attn[:,:,1]
+    p_attn2 = F.softmax(p_attn2,dim=-1)
+
     p_attn = p_attn[:,:,0] - lambda_full* p_attn[:,:,1] #(B,diff_num_head,N,N)
     if dropout is not None:
         p_attn = dropout(p_attn)

@@ -7,7 +7,7 @@ python main.py \
 --batch_size 32 \
 --epochs 30 \
 --lr_ve 1e-3 \
---lr_ed 2e-3 \
+--lr_ed 1.5e-3 \
 --save_dir ./results/iu_xray \
 --ve_name densenet121 \
 --ed_name r2gen \
@@ -29,4 +29,4 @@ python main.py \
 --topk 0.25 \
 --layer_id 2 \
 --mse_w 0.15 \
---num_workers 16
+--num_workers 8

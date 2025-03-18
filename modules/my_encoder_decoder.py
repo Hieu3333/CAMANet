@@ -258,15 +258,14 @@ class DiffMultiHeadedAttention(nn.Module): # MultiHeadedAttention(self.num_heads
     def __init__(self, h, d_model, dropout=0.1):
         super(DiffMultiHeadedAttention, self).__init__()
         assert d_model % h == 0
-        standard_d_k = d_model // h #standard head_size
         self.diff_num_head = h // 2 #h
-        self.diff_d_k = 2* standard_d_k #2d
+        self.diff_d_k = d_model // self.diff_num_head
         self.linears = clones(nn.Linear(d_model, d_model), 4)
         self.lambda_init = 0.8
-        self.lambda_q1 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
-        self.lambda_q2 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
-        self.lambda_k1 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
-        self.lambda_k2 = nn.Parameter(torch.zeros(standard_d_k, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_q1 = nn.Parameter(torch.zeros(self.diff_d_k//2, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_q2 = nn.Parameter(torch.zeros(self.diff_d_k//2, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_k1 = nn.Parameter(torch.zeros(self.diff_d_k//2, dtype=torch.float32).normal_(mean=0,std=0.1))
+        self.lambda_k2 = nn.Parameter(torch.zeros(self.diff_d_k//2, dtype=torch.float32).normal_(mean=0,std=0.1))
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
 

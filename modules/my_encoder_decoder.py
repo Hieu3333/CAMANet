@@ -409,7 +409,7 @@ class EncoderDecoder(AttModel):
 
     def make_model(self, tgt_vocab):
         c = copy.deepcopy
-        attn = DiffMultiHeadedAttention(self.num_heads, self.d_model)
+        attn = MultiHeadedAttention(self.num_heads, self.d_model)
         ff = PositionwiseFeedForward(self.d_model, self.d_ff, self.dropout)
         position = PositionalEncoding(self.d_model, self.dropout)
         rm = RelationalMemory(num_slots=self.rm_num_slots, d_model=self.rm_d_model, num_heads=self.rm_num_heads)

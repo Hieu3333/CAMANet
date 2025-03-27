@@ -351,8 +351,7 @@ class Trainer(BaseTrainer):
                     val_ce_losses += loss.item()
                     reports = self.tokenizer.decode_batch(output.cpu().numpy())
                     ground_truths = self.tokenizer.decode_batch(reports_ids[:, 1:].cpu().numpy())
-                    # print("Reports:",reports)
-                    # print("Ground truth:", ground_truths)
+         
                     val_res.extend(reports)
                     val_gts.extend(ground_truths)
                     memory_used = torch.cuda.max_memory_allocated() / (1024.0 * 1024.0)
@@ -361,6 +360,9 @@ class Trainer(BaseTrainer):
                     pbar.update()
                 val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                            {i: [re] for i, re in enumerate(val_res)})
+                print("GT:",val_gts)
+                print("Res:",val_res)
+                
                 log.update(**{'val_' + k: v for k, v in val_met.items()})
                 log.update({'val_loss': val_ce_losses / len(self.val_dataloader)})
                 self.writer.add_scalar('data/val_bleu1', val_met['BLEU_1'], epoch)

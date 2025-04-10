@@ -360,9 +360,9 @@ class Trainer(BaseTrainer):
                     pbar.update()
                 val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                            {i: [re] for i, re in enumerate(val_res)})
-                print("GT:",val_gts)
-                print("Res:",val_res)
-                
+
+                print(val_met)
+
                 log.update(**{'val_' + k: v for k, v in val_met.items()})
                 log.update({'val_loss': val_ce_losses / len(self.val_dataloader)})
                 self.writer.add_scalar('data/val_bleu1', val_met['BLEU_1'], epoch)
@@ -395,6 +395,7 @@ class Trainer(BaseTrainer):
                     pbar.update()
                 test_met = self.metric_ftns({i: [gt] for i, gt in enumerate(test_gts)},
                                             {i: [re] for i, re in enumerate(test_res)})
+                
                 log.update(**{'test_' + k: v for k, v in test_met.items()})
                 self.writer.add_scalar('data/test_bleu1', test_met['BLEU_1'], epoch)
                 self.writer.add_scalar('data/test_bleu2', test_met['BLEU_2'], epoch)

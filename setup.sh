@@ -13,8 +13,8 @@ sudo apt-get install default-jre
 sudo apt-get install default-jdk
 
 # Run on local
-scp -P 15047 "/mnt/c/Users/hieu3/Downloads/iu_xray.zip" root@172.219.157.164:/workspace/CAMANet #Replace ip address
-scp -P 15047 "/mnt/c/Users/hieu3/Downloads/labels.json" root@172.219.157.164:/workspace/CAMANet/data/iu_xray/labels
+scp -P 24730 "/mnt/c/Users/hieu3/Downloads/iu_xray.zip" root@185.150.27.254:/workspace/CAMANet #Replace ip address
+scp -P 24730 "/mnt/c/Users/hieu3/Downloads/labels.json" root@185.150.27.254:/workspace/CAMANet/data/iu_xray/labels
 
 #Continue on cloud
 pip install unzip

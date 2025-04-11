@@ -360,7 +360,10 @@ class Trainer(BaseTrainer):
                     pbar.update()
                 val_met = self.metric_ftns({i: [gt] for i, gt in enumerate(val_gts)},
                                            {i: [re] for i, re in enumerate(val_res)})
-
+                check_gts = {i: [gt] for i, gt in enumerate(val_gts)}
+                check_res = {i: [re] for i, re in enumerate(val_res)}
+                print("GTS:",check_gts.items()[:10])
+                print("Res:",check_res.items()[:10])
                 print(val_met)
 
                 log.update(**{'val_' + k: v for k, v in val_met.items()})
